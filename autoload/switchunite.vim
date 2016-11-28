@@ -1,4 +1,4 @@
-" Generate GitHub Private access token.
+" Switch Unite source
 " Version: 0.1.0
 " Author: momo-lab <momotaro.n@gmail.com> <https://github.com/momo-lab>
 " License: MIT

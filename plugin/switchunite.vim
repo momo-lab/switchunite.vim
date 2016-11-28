@@ -1,4 +1,4 @@
-" switch Unite source
+" Switch Unite source
 " Version: 0.1.0
 " Author: momo-lab <momotaro.n@gmail.com> <https://github.com/momo-lab>
 " License: MIT
@@ -8,11 +8,17 @@ if exists('g:loaded_switchunite')
 endif
 let g:loaded_switchunite = 1
 
+let s:save_cpo = &cpo
+set cpo&vim
+
 function! s:switchunite_init()
   let g:switchunite = get(g:, 'switchunite', {})
   for prefix in keys(g:switchunite)
+    " TODO Check illegal option.
+    "   keymap is required.
+    "   commands is not empty array.
+
     " normalize settings
-    " TODO 不正なオプション(keymapは必須、commandsは1つ以上必須)の場合にエラーを表示する
     let g:switchunite[prefix] = extend(g:switchunite[prefix], {
           \ 'prefix': prefix,
           \ 'keymap_next': get(g:, 'switchunite_keymap_next', '<C-f>'),
@@ -37,10 +43,6 @@ augroup switchunite
   autocmd!
   autocmd FileType unite call switchunite#autocmd()
 augroup END
-
-let s:save_cpo = &cpo
-set cpo&vim
-
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
