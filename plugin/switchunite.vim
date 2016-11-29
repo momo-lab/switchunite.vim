@@ -1,5 +1,5 @@
 " Switch Unite source
-" Version: 0.1.0
+" Version: 0.2.0
 " Author: momo-lab <momotaro.n@gmail.com> <https://github.com/momo-lab>
 " License: MIT
 
