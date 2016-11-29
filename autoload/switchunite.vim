@@ -24,11 +24,11 @@ function! switchunite#add(name, settings)
 
   " setting keymap
   execute printf('nnoremap <silent> %s :<C-u>%s -profile-name=%s%i %s %s<CR>',
-        \ settings['keymap'],
-        \ settings['commands'][0][0],
-        \ settings['name'], 0,
-        \ settings['option'],
-        \ settings['commands'][0][1])
+        \ settings.keymap,
+        \ settings.commands[0][0],
+        \ settings.name, 0,
+        \ settings.option,
+        \ settings.commands[0][1])
 endfunction
 
 function! switchunite#autocmd()
@@ -39,9 +39,9 @@ function! switchunite#autocmd()
     endif
     let settings = g:switchunite[name]
     let num = str2nr(substitute(unite.profile_name, name, '', ''))
-    let next = (num + 1) < len(settings['commands']) ? num + 1 : 0
+    let next = (num + 1) < len(settings.commands) ? num + 1 : 0
     call s:map(settings, 'next', next)
-    let prev = (num > 0 ? num : len(settings['commands'])) - 1
+    let prev = (num > 0 ? num : len(settings.commands)) - 1
     call s:map(settings, 'prev', prev)
   endfor
 endfunction
@@ -50,10 +50,10 @@ function! s:map(settings, mode, index)
   let cmd = printf('map <silent><buffer> %s <Plug>(unite_exit)' .
         \ ':<C-u>%s -profile-name=%s%i %s %s<CR>',
         \ a:settings['keymap_' . a:mode],
-        \ a:settings['commands'][a:index][0],
-        \ a:settings['name'], a:index,
-        \ a:settings['option'],
-        \ a:settings['commands'][a:index][1])
+        \ a:settings.commands[a:index][0],
+        \ a:settings.name, a:index,
+        \ a:settings.option,
+        \ a:settings.commands[a:index][1])
   execute 'i' . cmd
   execute 'n' . cmd
 endfunction
